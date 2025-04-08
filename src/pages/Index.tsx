@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import EasterInvitation from "@/components/EasterInvitation";
 import FloatingElements from "@/components/FloatingElements";
+import { Toaster } from "sonner";
 
 const Index = () => {
   const [showFloatingElements, setShowFloatingElements] = useState(false);
@@ -26,6 +27,9 @@ const Index = () => {
       
       {showFloatingElements && <FloatingElements />}
       <EasterInvitation />
+      
+      {/* Add Sonner Toaster for sweet messages */}
+      <Toaster richColors position="top-center" />
     </div>
   );
 };

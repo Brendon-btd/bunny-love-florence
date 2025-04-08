@@ -1,5 +1,8 @@
+
 import { useEffect, useState } from 'react';
 import { Heart, Flower, Sparkles } from 'lucide-react';
+import { toast } from "sonner";
+import MovingButton from './MovingButton';
 
 const LoveLetter = ({ onBackToEnvelope }: { onBackToEnvelope: () => void }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -12,6 +15,19 @@ const LoveLetter = ({ onBackToEnvelope }: { onBackToEnvelope: () => void }) => {
     
     return () => clearTimeout(timer);
   }, []);
+
+  const handleNoClick = () => {
+    toast("I knew you'd say yes anyway! My heart is all yours! 💝", {
+      position: "top-center",
+      duration: 5000,
+      icon: "💌"
+    });
+    
+    // After showing the message, trigger the yes action anyway
+    setTimeout(() => {
+      onBackToEnvelope();
+    }, 2000);
+  };
 
   return (
     <div className={`transition-all duration-700 transform ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
@@ -85,12 +101,13 @@ const LoveLetter = ({ onBackToEnvelope }: { onBackToEnvelope: () => void }) => {
                 <Heart className="animate-heart-beat" size={20} fill="white" />
               </button>
               
-              {/* We'll keep the moving button for the "No" option */}
-              <div className="relative">
-                <button className="invisible">
-                  No, thanks
-                </button>
-              </div>
+              {/* Moving button for "No" that shows a sweet message when clicked */}
+              <MovingButton 
+                className="text-lg bg-red-400" 
+                onClick={handleNoClick}
+              >
+                No, thanks
+              </MovingButton>
             </div>
           </div>
         </div>

@@ -4,12 +4,14 @@ import { cn } from "@/lib/utils";
 interface MovingButtonProps {
   children: React.ReactNode;
   className?: string;
+  onClick?: () => void;
 }
 
-const MovingButton = ({ children, className }: MovingButtonProps) => {
+const MovingButton = ({ children, className, onClick }: MovingButtonProps) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const buttonRef = useRef<HTMLButtonElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [clickCount, setClickCount] = useState(0);
 
   const moveButton = () => {
     if (!buttonRef.current || !containerRef.current) return;
@@ -60,6 +62,20 @@ const MovingButton = ({ children, className }: MovingButtonProps) => {
     moveButton();
   };
 
+  const handleClick = () => {
+    // Increment click count
+    setClickCount(clickCount + 1);
+    
+    // If they've tried to click 3 or more times, or if there's a provided onClick handler
+    if (clickCount >= 2 || onClick) {
+      // Call the provided onClick handler if it exists
+      if (onClick) onClick();
+    } else {
+      // Otherwise just move the button
+      moveButton();
+    }
+  };
+
   useEffect(() => {
     // Start with a random position
     setTimeout(() => {
@@ -85,7 +101,7 @@ const MovingButton = ({ children, className }: MovingButtonProps) => {
           transform: `translate(${position.x}px, ${position.y}px)`,
           zIndex: 10
         }}
-        onClick={moveButton} // Also move on click
+        onClick={handleClick}
       >
         {children}
       </button>
