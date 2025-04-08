@@ -127,3 +127,35 @@
 .no-select {
   user-select: none;
 }
+
+/* Envelope and letter styling */
+.envelope-card {
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: all 0.5s ease-in-out;
+}
+
+.envelope-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.rotate-x-180 {
+  transform: rotateX(180deg);
+}
+
+.letter {
+  background-color: white;
+  background-image: 
+    radial-gradient(circle at 100% 150%, #FFDEE2 24%, white 24%, white 28%, #FFDEE2 28%, #FFDEE2 36%, white 36%, white 40%, transparent 40%, transparent),
+    radial-gradient(circle at 0 150%, #FFDEE2 24%, white 24%, white 28%, #FFDEE2 28%, #FFDEE2 36%, white 36%, white 40%, transparent 40%, transparent),
+    radial-gradient(circle at 50% 100%, white 10%, #FFDEE2 10%, #FFDEE2 23%, white 23%, white 30%, #FFDEE2 30%, #FFDEE2 43%, white 43%, white 50%, #FFDEE2 50%, #FFDEE2 63%, white 63%, white 71%, transparent 71%, transparent),
+    radial-gradient(circle at 100% 50%, white 5%, #FFDEE2 5%, #FFDEE2 15%, white 15%, white 20%, #FFDEE2 20%, #FFDEE2 29%, white 29%, white 34%, #FFDEE2 34%, #FFDEE2 44%, white 44%, white 49%, transparent 49%, transparent),
+    radial-gradient(circle at 0 50%, white 5%, #FFDEE2 5%, #FFDEE2 15%, white 15%, white 20%, #FFDEE2 20%, #FFDEE2 29%, white 29%, white 34%, #FFDEE2 34%, #FFDEE2 44%, white 44%, white 49%, transparent 49%, transparent);
+  background-size: 100px 50px;
+  background-attachment: fixed;
+}
+
+.font-script {
+  font-family: 'Brush Script MT', cursive, serif;
+}
