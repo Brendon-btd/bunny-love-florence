@@ -125,6 +125,10 @@ export default {
 					'0%': { transform: 'translateY(-100px) rotate(0deg)', opacity: '0' },
 					'50%': { opacity: '1' },
 					'100%': { transform: 'translateY(calc(100vh + 100px)) rotate(360deg)', opacity: '0' },
+				},
+				'gradient-slow': {
+					'0%, 100%': { backgroundPosition: '0% 50%' },
+					'50%': { backgroundPosition: '100% 50%' },
 				}
 			},
 			animation: {
@@ -137,8 +141,10 @@ export default {
 				'scale-in': 'scale-in 0.5s ease-out forwards',
 				'heart-beat': 'heart-beat 1s ease-in-out infinite',
 				'fall': 'fall 10s linear forwards',
+				'gradient-slow': 'gradient-slow 15s ease infinite',
 			}
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+
