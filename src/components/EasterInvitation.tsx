@@ -18,20 +18,21 @@ const EasterInvitation = () => {
   const handleYes = () => {
     setShowCelebration(true);
     setShowLetter(false);
-    setShowOriginalCard(true);
+    // Remove this line to prevent showing the original card overlay
+    // setShowOriginalCard(true);
   };
 
   return (
     <div className="relative w-full h-full flex items-center justify-center">
-      {!showLetter && !showOriginalCard && (
+      {!showLetter && !showCelebration && (
         <EnvelopeCard onOpen={handleEnvelopeOpen} />
       )}
       
-      {showLetter && (
+      {showLetter && !showCelebration && (
         <LoveLetter onBackToEnvelope={handleYes} />
       )}
 
-      {showOriginalCard && (
+      {showOriginalCard && !showCelebration && (
         <div className="card-container rounded-3xl p-8 md:p-12 max-w-md mx-auto text-center relative z-10 animate-scale-in">
           <div className="flex justify-center mb-4">
             <Heart 
