@@ -20,7 +20,7 @@ const EnvelopeCard = ({ onOpen }: { onOpen: () => void }) => {
         <p className="text-xs text-pink-500 font-serif mt-1">— Song of Solomon 8:7</p>
       </div>
       
-      <div className="mt-12 mb-2">
+      <div className="mt-24 mb-2">
         <p className="text-2xl font-script text-purple-600 mb-2">To</p>
         <h2 className="text-4xl font-bold text-pink-600 mb-4 font-serif tracking-wide">Florence</h2>
       </div>
