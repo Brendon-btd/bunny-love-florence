@@ -13,14 +13,14 @@ const EnvelopeCard = ({ onOpen }: { onOpen: () => void }) => {
       onClick={onOpen}
     >
       {/* Bible verse at the top */}
-      <div className="absolute top-0 left-0 right-0 px-6 pt-4">
+      <div className="absolute top-0 left-0 right-0 px-6 pt-6">
         <p className="text-sm italic text-pink-600 font-serif">
           "Many waters cannot quench love; rivers cannot sweep it away. If one were to give all the wealth of one's house for love, it would be utterly scorned."
         </p>
         <p className="text-xs text-pink-500 font-serif mt-1">— Song of Solomon 8:7</p>
       </div>
       
-      <div className="mt-28 mb-2">
+      <div className="mt-32 mb-2">
         <p className="text-2xl font-script text-purple-600 mb-2">To</p>
         <h2 className="text-4xl font-bold text-pink-600 mb-4 font-serif tracking-wide">Florence</h2>
       </div>
