@@ -1,108 +1,95 @@
 
 import { useState, useEffect } from 'react';
-import { Egg, Heart, Sparkles } from 'lucide-react';
-
-interface FallingItem {
-  id: number;
-  type: 'heart' | 'egg' | 'sparkle';
-  x: number;
-  delay: number;
-  duration: number;
-  size: number;
-}
+import { Heart, Music, ArrowRight } from 'lucide-react';
 
 const Celebration = () => {
-  const [items, setItems] = useState<FallingItem[]>([]);
-
+  const [showMessage, setShowMessage] = useState(false);
+  
   useEffect(() => {
-    const generateItems = () => {
-      const newItems: FallingItem[] = [];
-      const types = ['heart', 'egg', 'sparkle'];
-      
-      // Generate 50 falling items
-      for (let i = 0; i < 50; i++) {
-        newItems.push({
-          id: i,
-          type: types[Math.floor(Math.random() * types.length)] as 'heart' | 'egg' | 'sparkle',
-          x: Math.random() * 100, // percentage
-          delay: Math.random() * 5, // seconds
-          duration: Math.random() * 6 + 4, // seconds
-          size: Math.random() * 20 + 10, // pixels
-        });
-      }
-      
-      return newItems;
-    };
+    // Show the message after a short delay
+    const timer = setTimeout(() => {
+      setShowMessage(true);
+    }, 1000);
     
-    setItems(generateItems());
+    return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden z-40">
-      <div className="absolute inset-0 bg-gradient-to-b from-pink-100/70 to-purple-100/70 z-10" />
-      
-      <div className="relative z-20 h-full flex flex-col items-center justify-center">
-        <div className="text-center">
-          <h2 
-            className="text-3xl md:text-5xl font-bold text-pink-500 mb-4 animate-scale-in"
-            style={{ animationDelay: '0.5s' }}
-          >
-            Yay! You're my Easter Bunny! 
-          </h2>
-          <p 
-            className="text-xl md:text-2xl text-purple-700 animate-scale-in"
-            style={{ animationDelay: '1s' }}
-          >
-            🐰🌸💗
-          </p>
+    <div className="w-full max-w-lg mx-auto">
+      <div className="animate-enter flex flex-col items-center">
+        {/* Hearts floating up animation */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(15)].map((_, i) => (
+            <Heart
+              key={i}
+              className="absolute text-pink-400 animate-float"
+              size={20 + Math.random() * 20}
+              style={{
+                left: `${Math.random() * 100}%`,
+                animationDuration: `${3 + Math.random() * 7}s`,
+                animationDelay: `${Math.random() * 2}s`,
+                transform: `rotate(${Math.random() * 30 - 15}deg)`,
+                opacity: 0.7 + Math.random() * 0.3,
+              }}
+              fill="#FFDEE2"
+              strokeWidth={1.5}
+            />
+          ))}
         </div>
-      </div>
-      
-      {items.map((item) => {
-        let Icon;
-        let color = '';
         
-        switch (item.type) {
-          case 'heart':
-            Icon = Heart;
-            color = '#FFDEE2';
-            break;
-          case 'egg':
-            Icon = Egg;
-            color = [
-              '#FFDEE2', // pink
-              '#E5DEFF', // lavender
-              '#FFF4BD', // yellow
-              '#D8F5E8', // mint
-            ][Math.floor(Math.random() * 4)];
-            break;
-          case 'sparkle':
-            Icon = Sparkles;
-            color = '#FFFDF0';
-            break;
-          default:
-            return null;
-        }
-        
-        return (
-          <div
-            key={item.id}
-            className="absolute top-0"
-            style={{
-              left: `${item.x}%`,
-              animation: `fall ${item.duration}s linear forwards`,
-              animationDelay: `${item.delay}s`,
-            }}
-          >
-            <Icon 
-              size={item.size} 
-              color={color} 
-              fill={item.type === 'heart' ? color : ''}
-              className="drop-shadow-lg"
+        <div 
+          className={`transition-opacity duration-1000 card-container rounded-3xl p-8 md:p-10 max-w-md mx-auto text-center relative ${
+            showMessage ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          <div className="flex justify-center mb-4">
+            <Heart 
+              className="text-pink-400 animate-heart-beat" 
+              size={60} 
+              fill="#FFDEE2" 
+              strokeWidth={1.5} 
             />
           </div>
-        );
-      })}
+          
+          <h2 className="text-3xl font-bold text-pink-600 mb-6 font-serif">
+            You've made me the happiest!
+          </h2>
+          
+          <div className="space-y-4 text-purple-700 leading-relaxed">
+            <p>
+              My dearest Florence, your "yes" brings joy to my heart like nothing else.
+              Just like Solomon's words in the Bible, our love is unquenchable.
+            </p>
+            
+            <p className="italic font-serif text-sm text-pink-600">
+              "Many waters cannot quench love; rivers cannot sweep it away."
+              — Song of Solomon 8:7
+            </p>
+            
+            <p>
+              Every moment with you feels like a blessing. Your smile brightens my days,
+              and your kindness inspires me to be better. I can't wait to spend this Easter with you,
+              creating memories that will last a lifetime.
+            </p>
+            
+            <div className="pt-4">
+              <a
+                href="https://youtu.be/p1tNOKo7OOc?si=2H6prHyt0Oz-WPlj"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gradient-to-r from-purple-400 to-pink-400 hover:from-purple-500 hover:to-pink-500 
+                       text-white py-3 px-6 rounded-full text-lg font-bold shadow-lg
+                       border-2 border-white transition-all duration-300
+                       hover:scale-105 inline-flex items-center gap-2"
+              >
+                <Music size={20} />
+                <span>Play Me</span>
+                <ArrowRight size={16} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

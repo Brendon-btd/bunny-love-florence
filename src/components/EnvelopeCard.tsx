@@ -1,84 +1,46 @@
 
 import { useState } from 'react';
-import { Heart, Mail, MailOpen } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { Heart, Flower } from 'lucide-react';
 
 const EnvelopeCard = ({ onOpen }: { onOpen: () => void }) => {
-  const [isOpening, setIsOpening] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
   
-  const handleOpen = () => {
-    setIsOpening(true);
-    // Add a delay to allow the animation to complete before showing the letter
-    setTimeout(() => {
-      onOpen();
-    }, 600);
-  };
-
   return (
     <div 
-      className={cn(
-        "envelope-card w-full max-w-sm aspect-[4/3] bg-gradient-to-br from-pink-200 to-purple-100 rounded-lg shadow-xl relative overflow-hidden transition-all duration-500",
-        isOpening && "scale-150 opacity-0"
-      )}
+      className="envelope-card rounded-3xl p-8 md:p-12 max-w-md mx-auto text-center bg-white bg-opacity-90 shadow-xl relative"
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+      onClick={onOpen}
     >
-      {/* Envelope flap (top) */}
-      <div className={cn(
-        "absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-pink-300 to-pink-200 origin-top transition-all duration-500 z-20",
-        isOpening ? "rotate-x-180" : ""
-      )}>
-        <div 
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 cursor-pointer hover:scale-110 transition-transform"
-          onClick={handleOpen}
-        >
-          <Heart 
-            className="text-pink-500 animate-heart-beat" 
-            size={40} 
-            fill="#FFDEE2" 
-            strokeWidth={1.5} 
-          />
-        </div>
+      {/* Bible verse at the top */}
+      <div className="absolute top-4 left-0 right-0 px-6">
+        <p className="text-sm italic text-pink-600 font-serif">
+          "Many waters cannot quench love; rivers cannot sweep it away. If one were to give all the wealth of one's house for love, it would be utterly scorned."
+        </p>
+        <p className="text-xs text-pink-500 font-serif mt-1">— Song of Solomon 8:7</p>
       </div>
       
-      {/* Envelope body */}
-      <div className="absolute inset-0 flex items-center justify-center p-8 bg-gradient-to-br from-pink-50 to-purple-50 z-10">
-        <div className="text-center">
-          {isOpening ? (
-            <MailOpen 
-              className="text-pink-600 animate-bounce mx-auto mb-2" 
-              size={48} 
-              strokeWidth={1.5} 
-            />
-          ) : (
-            <Mail 
-              className="text-pink-600 mx-auto mb-2" 
-              size={48} 
-              strokeWidth={1.5} 
-            />
-          )}
-          <p className="text-purple-700 text-lg font-medium">
-            {isOpening ? "Opening..." : "Click the heart to open"}
-          </p>
-        </div>
+      <div className="mt-12 mb-2">
+        <p className="text-2xl font-script text-purple-600 mb-2">To</p>
+        <h2 className="text-4xl font-bold text-pink-600 mb-4 font-serif tracking-wide">Florence</h2>
       </div>
       
-      {/* Decorations */}
-      <div className="absolute bottom-4 left-4 opacity-30">
-        <Heart size={20} fill="#FFDEE2" strokeWidth={1} className="text-pink-400" />
-      </div>
-      <div className="absolute top-4 right-4 opacity-30">
-        <Heart size={20} fill="#FFDEE2" strokeWidth={1} className="text-pink-400" />
-      </div>
-      <div className="absolute bottom-4 right-8 opacity-20">
-        <Heart size={15} fill="#FFDEE2" strokeWidth={1} className="text-pink-400" />
-      </div>
-      <div className="absolute top-8 left-6 opacity-20">
-        <Heart size={15} fill="#FFDEE2" strokeWidth={1} className="text-pink-400" />
+      <div className="envelope-flap relative mt-4 flex justify-center">
+        <Heart
+          className={`text-pink-400 transition-transform duration-300 z-10 cursor-pointer ${
+            isHovering ? 'scale-110' : ''
+          }`}
+          size={60}
+          fill="#FFDEE2"
+          strokeWidth={1.5}
+        />
       </div>
       
-      {/* Envelope edge details */}
-      <div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-pink-300 via-purple-200 to-pink-300"></div>
-      <div className="absolute top-1/2 left-0 w-2 bottom-0 bg-gradient-to-b from-pink-200 to-pink-300"></div>
-      <div className="absolute top-1/2 right-0 w-2 bottom-0 bg-gradient-to-b from-pink-200 to-pink-300"></div>
+      <div className="mt-6 flex justify-center items-center">
+        <Flower className="text-pink-300 mr-2" size={20} />
+        <p className="text-purple-600 text-sm">Click to open</p>
+        <Flower className="text-pink-300 ml-2" size={20} />
+      </div>
     </div>
   );
 };
